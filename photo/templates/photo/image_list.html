@@ -1,0 +1,5 @@
+<h1>Все изображения</h1>
+
+{% for image in images %}
+    <img src="{{ image.image.url }}"/>
+{% endfor %}
