@@ -3,4 +3,4 @@ from .models import Photo
 
 def list_image(request):
     images = Photo.objects.all()
-    return render(request, 'photo/image_list.html', {'images': images})
+    return render(request, 'photo/navbar.html', {'images': images})
