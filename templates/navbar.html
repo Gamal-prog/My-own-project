@@ -16,17 +16,6 @@
       class="collapse navbar-collapse flex-row-reverse"
       id="navbarTogglerDemo02"
     >
-
-    <!--Image-->
-    <div>
-      {% for image in images %}
-        <h1> <a href="photo_detail.html">{{ image.title }}</a> </h1>
-        <img src="{{ image.image.url }}"/>
-        <p> {{ image.discription }} </p>
-        <p> published: {{ image.published_date }} </p>
-      {% endfor %}
-    </div>
-
       <ul class="navbar-nav">
         {% if user.is_authenticated %}
 
