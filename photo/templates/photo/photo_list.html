@@ -1,7 +1,20 @@
 {% extends 'base.html' %}
 
 {% block body %} 
-    <!--<div>
+
+    <div class="card" style="width: 18rem;">
+      {% for image in images %}
+      <img src="{{ image.image.url }}" class="card-img-top">
+      <div class="card-body">
+        <h4> {{ image.title }}</a> </h4>
+        <p class="card-text"> {{ image.discription }} </p>
+        <a href="{% url 'image_detail' pk=image.pk %}" class="btn btn-primary">Detail</a>
+      </div>
+      {% endfor %}
+    </div>
+{% endblock body %} 
+
+<!--<div>
       {% for image in images %}
         <h1> <a href="{% url 'image_detail' %}">{{ image.title }}</a> </h1>
         <img src="{{ image.image.url }}"/>
@@ -9,13 +22,3 @@
         <p> published: {{ image.published_date }} </p>
       {% endfor %}
     </div>-->
-    <div class="card" style="width: 18rem;">
-      {% for image in images %}
-      <img src="{{ image.image.url }}" class="card-img-top">
-      <div class="card-body">
-        <h1> <a href="{% url 'image_detail' %}">{{ image.title }}</a> </h1>
-        <p class="card-text"> {{ image.discription }} </p>
-      </div>
-      {% endfor %}
-    </div>
-{% endblock body %} 
