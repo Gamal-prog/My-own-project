@@ -2,16 +2,30 @@
 
 {% block body %} 
 
+{% for image in images %}
+  {% if forloop.counter0|divisibleby:3 %} <div class="row"> {% endif %}
     <div class="card" style="width: 18rem;">
-      {% for image in images %}
       <img src="{{ image.image.url }}" class="card-img-top">
-      <div class="card-body">
-        <h4> {{ image.title }}</a> </h4>
-        <p class="card-text"> {{ image.discription }} </p>
-        <a href="{% url 'image_detail' pk=image.pk %}" class="btn btn-primary">Detail</a>
-      </div>
-      {% endfor %}
+        <div class="card-body">
+          <h4> {{ image.title }} </h4>
+          <p class="card-text"> {{ image.discription }} </p>
+          <a href="{% url 'image_detail' pk=image.pk %}" class="btn btn-primary">Detail</a>
+        </div>
     </div>
+  {% if forloop.counter|divisibleby:3 or forloop.last %} </div> <hr> {% endif %}
+{% endfor %}
+
+<style>
+  .card{
+    margin: auto;
+  }
+  
+  img{
+    margin: 5px;
+    border-radius: 5px;
+  }
+</style>
+
 {% endblock body %} 
 
 <!--<div>
