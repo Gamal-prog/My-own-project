@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Photo
 from .forms import PhotoForm
@@ -21,23 +22,23 @@ def image_new(request):
             return redirect('image_list')
     else:
         form = PhotoForm()
-    return render(request, 'photo/photo_edit.html', {'image_form': form})
+    return render(request, 'photo/photo_new.html', {'image_form': form})
 
-
-
-'''
-def post_new(request):
-    if request.method == "POST":
-        form = PhotoForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.save()
-            return redirect('photo_detail', pk=post.pk)
+def image_edit(request, pk):
+    image = get_object_or_404(Photo, pk=pk)
+    form = PhotoForm(request.POST or None, request.FILES or None, instance=image)
+    if form.is_valid():
+        form.save()
+        return redirect('image_list')
     else:
-        form = PhotoForm()
-    return render(request, 'photo/photo_edit.html', {'form': form})
-'''
+        form = PhotoForm(request.POST or None, instance=image)
+    return render(request, 'photo/photo_edit.html', {'image': image, 'form': form})
+
+def image_delete(request, pk):
+    image = get_object_or_404(Photo, pk=pk)
+    image.delete()
+    return redirect('image_list')
+
 
 
 
@@ -63,37 +64,3 @@ def logout_user(request):
     logout(request)
     messages.success(request, ("You have been logged out"))
     return redirect('image_list')
-
-
-
-'''def photo_edit(request, pk):
-    image = get_object_or_404(Photo, pk=pk)
-    if request.method == "POST":
-        form = PhotoForm(request.POST, instance=image)
-        if form.is_valid():
-            image = form.save(commit=False)
-            image.author = request.user
-            image.save()
-            return redirect('photo_detail', pk=image.pk)
-        else:
-         form = PhotoForm(instance=image)
-    return render(request, 'blog/photo_edit.html', {'form': form})'''
-
-'''if request.method == "POST":
-        if 'save' in request.POST:
-            form = PhotoForm(request.POST)
-            form.save()'''
-
-'''
-def image_new(request):
-    form = PhotoForm()
-    if request.method == "POST":
-        form = PhotoForm(request.POST)
-        if form.is_valid():
-            image = form.save(commit=False)
-            image.author = request.user
-            image.save()
-            return redirect('photo_detail', pk=image.pk)
-    else:
-        form = PhotoForm()
-    return render(request, 'photo/photo_edit.html', {'form': form})'''

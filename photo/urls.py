@@ -7,8 +7,8 @@ urlpatterns = [
     path('', views.list_image, name='image_list'),
     path('photo/<int:pk>/', views.image_detail, name='image_detail'),
     path('photo/new/', views.image_new, name='image_new'),
-
-    #path('photo/<int:pk>/edit/', views.photo_edit, name='image_edit'),
+    path('photo/<int:pk>/edit/', views.image_edit, name='image_edit'),
+    path('photo/<int:pk>/delete', views.image_delete, name='image_delete'),
 
     path('login/', views.login_user, name='login'),
     path('logout/', views.logout_user, name='logout'),

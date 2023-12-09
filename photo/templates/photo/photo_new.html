@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block body %} 
+    <h1 class="title">Create image</h1>
+    <form method="POST" class="post-form" action="{% url 'image_new' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ image_form.as_p }}
+        <button class="btn btn-primary" name="save" type="submit">Save</button>
+    </form>
+{% endblock body %}
+
+    
