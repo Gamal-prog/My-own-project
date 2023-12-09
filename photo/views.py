@@ -13,8 +13,36 @@ def image_detail(request, pk):
     return render(request, 'photo/photo_detail.html', {'image': image})
 
 def image_new(request):
-    form = PhotoForm()
+    if request.method == 'POST':
+        form = PhotoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.author = request.user
+            form.save()
+            return redirect('image_list')
+    else:
+        form = PhotoForm()
+    return render(request, 'photo/photo_edit.html', {'image_form': form})
+
+
+
+'''
+def post_new(request):
+    if request.method == "POST":
+        form = PhotoForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            return redirect('photo_detail', pk=post.pk)
+    else:
+        form = PhotoForm()
     return render(request, 'photo/photo_edit.html', {'form': form})
+'''
+
+
+
+
+
 
 def login_user(request):
     if request.method == "POST":
@@ -56,8 +84,9 @@ def logout_user(request):
             form = PhotoForm(request.POST)
             form.save()'''
 
-
-'''def image_new(request):
+'''
+def image_new(request):
+    form = PhotoForm()
     if request.method == "POST":
         form = PhotoForm(request.POST)
         if form.is_valid():
