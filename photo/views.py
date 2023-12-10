@@ -70,31 +70,3 @@ def logout_user(request):
     logout(request)
     messages.success(request, ("You have been logged out"))
     return redirect('image_list')
-
-
-
-
-
-
-
-'''
-def login_user(request):
-    if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password,)
-        if user is not None:
-            login(request, user)
-            messages.success(request, ("You have been logged in"))
-            return redirect('image_list')
-        else:
-            messages.success(request, ("Try again, please"))
-            return redirect('login')
-    else:
-        return render(request, 'photo/login.html', {})
-
-def logout_user(request):
-    logout(request)
-    messages.success(request, ("You have been logged out"))
-    return redirect('image_list')
-'''
