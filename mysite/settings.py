@@ -38,8 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'photo',
-    #'users',
-    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -124,10 +122,10 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 
-LOGIN_URL = 'user:login'
-LOGIN_REDIRECT_URL = 'photo:photo_list'
+#LOGIN_URL = 'user:login'
+#LOGIN_REDIRECT_URL = 'photo:photo_list'
+#LOGOUT_REDIRECT_URL = 'photo:photo_list'
 
-LOGOUT_REDIRECT_URL = 'photo:photo_list'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 

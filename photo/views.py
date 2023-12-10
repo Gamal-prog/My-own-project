@@ -1,9 +1,9 @@
-import os
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Photo
 from .forms import PhotoForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm
 
 def list_image(request):
     images = Photo.objects.all()
@@ -39,12 +39,45 @@ def image_delete(request, pk):
     image.delete()
     return redirect('image_list')
 
+#####################users 
+
+def register(request):
+    form = UserCreationForm()
+
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    return render(request, 'photo/register.html', {'reg_form': form})
+
+def login_user(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password,)
+        if user is not None:
+            login(request, user)
+            messages.success(request, ("You have been logged in"))
+            return redirect('image_list')
+        else:
+            messages.success(request, ("Try again, please"))
+            return redirect('login')
+    else:
+        return render(request, 'photo/login.html', {})
+    
+def logout_user(request):
+    logout(request)
+    messages.success(request, ("You have been logged out"))
+    return redirect('image_list')
 
 
 
 
 
 
+
+'''
 def login_user(request):
     if request.method == "POST":
         username = request.POST['username']
@@ -64,3 +97,4 @@ def logout_user(request):
     logout(request)
     messages.success(request, ("You have been logged out"))
     return redirect('image_list')
+'''

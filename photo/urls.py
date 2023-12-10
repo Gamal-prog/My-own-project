@@ -9,7 +9,8 @@ urlpatterns = [
     path('photo/new/', views.image_new, name='image_new'),
     path('photo/<int:pk>/edit/', views.image_edit, name='image_edit'),
     path('photo/<int:pk>/delete', views.image_delete, name='image_delete'),
-
+    #users
+    path('register/', views.register, name='register'),
     path('login/', views.login_user, name='login'),
     path('logout/', views.logout_user, name='logout'),
 ]

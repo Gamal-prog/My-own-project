@@ -25,10 +25,12 @@
         <li class="nav-item">
           <a class="nav-link active" href="#">Hi {{user.username}}</a>
         </li>
-        {% else %}
-
         <li class="nav-item">
-          <a href="{% url 'login' %}" class="btn btn-sm btn-danger"
+          <a class="btn btn-danger" href="{% url 'logout' %}"> Logout</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a href="{% url 'register' %}" class="btn btn-sm btn-danger"
             >Sign In</a
           >
         </li>
