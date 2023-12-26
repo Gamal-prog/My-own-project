@@ -4,6 +4,7 @@ from .forms import PhotoForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
+from django.http import HttpResponse
 
 def list_image(request):
     images = Photo.objects.all()
@@ -70,3 +71,9 @@ def logout_user(request):
     logout(request)
     messages.success(request, ("You have been logged out"))
     return redirect('image_list')
+
+def download(request, pk):
+    file = Photo.objects.get(pk=pk)
+    response = HttpResponse(file.image, content_type='application/force-download')
+    response['Content-Disposition'] = f'attachment; filename="{file.image.name}"'
+    return response
